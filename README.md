@@ -3,8 +3,8 @@ Self Study, 2D Metroidvania Game
 
 ## TODO:
 
-- [ ] Player Manager
-- [ ] Camera Manager
+- [X] Player Manager
+- [X] Camera Manager
 - [ ] Weapon System
 - [ ] Abilites
 - [ ] Unlocking

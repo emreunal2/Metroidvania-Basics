@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    [SerializeField] BulletController bullet;
+    [SerializeField] Transform shotPoint;
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
 
@@ -37,11 +39,19 @@ public class PlayerMovement : MonoBehaviour
         if(isOnGround)
         {
             if (Input.GetButtonDown("Jump"))
-            {
+            {               
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
         }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            anim.SetTrigger("isShooting");
+            Instantiate(bullet, shotPoint.position, shotPoint.rotation).MoveDir = new Vector2(transform.localScale.x, 0f);
+           
+        }
         anim.SetBool("isOnGround", isOnGround);
         anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+         
     }
 }

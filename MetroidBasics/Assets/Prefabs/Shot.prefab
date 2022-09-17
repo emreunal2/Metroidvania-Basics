@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4ff874cb596b94bb6896ed9e96a2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 15
+  bulletSpeed: 25
   moveDir: {x: -1, y: 0}
   impactEffect: {fileID: 7700276299630626567, guid: 965e678a97ba73d49aafe45234f0a44f, type: 3}
 --- !u!50 &1025884254539072516

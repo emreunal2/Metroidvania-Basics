@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 863663189}
   - component: {fileID: 863663190}
   - component: {fileID: 863663191}
+  - component: {fileID: 863663192}
   m_Layer: 0
   m_Name: Ball Sprite
   m_TagString: Untagged
@@ -384,6 +385,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!95 &863663192
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863663188}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2d8ecd1f6647e8d49a8585cbad55e0f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1041521947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,6 +2438,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1394273153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1394273154}
+  m_Layer: 8
+  m_Name: Bomb Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1394273154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394273153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1471012492}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1471012491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,6 +2481,7 @@ GameObject:
   - component: {fileID: 1471012493}
   - component: {fileID: 1471012494}
   - component: {fileID: 1471012495}
+  - component: {fileID: 1471012496}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -2452,6 +2505,7 @@ Transform:
   - {fileID: 863663189}
   - {fileID: 388146559}
   - {fileID: 225657585}
+  - {fileID: 1394273154}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2472,9 +2526,9 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 5
   m_Material: {fileID: 6200000, guid: 103dc40dd5507654a879f09233fa1bff, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1471012494
 MonoBehaviour:
@@ -2497,6 +2551,7 @@ MonoBehaviour:
     m_Bits: 64
   groundPoint: {fileID: 388146559}
   anim: {fileID: 2071567602}
+  ballAnim: {fileID: 863663192}
   dashSpeed: 30
   dashTime: 0.2
   dashCooldown: 4
@@ -2504,6 +2559,9 @@ MonoBehaviour:
   ball: {fileID: 863663188}
   ballCooldown: 3
   ballCooldownCounter: 0
+  bombPoint: {fileID: 1394273154}
+  bomb: {fileID: 7297885367983149076, guid: 561d7726939027c4b8159498d1146b02, type: 3}
+  abilities: {fileID: 0}
 --- !u!212 &1471012495
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2556,6 +2614,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1471012496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471012491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8619bb63c0a80408b7156f60286aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2071567598
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,7 +2640,7 @@ GameObject:
   - component: {fileID: 2071567602}
   m_Layer: 8
   m_Name: Standing Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2678,3 +2748,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &1737294195245461910
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283507, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737294194836283510, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}
+      propertyPath: m_Name
+      value: Power Up
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0a2e8c250df2a4f4d82141b854624ed5, type: 3}

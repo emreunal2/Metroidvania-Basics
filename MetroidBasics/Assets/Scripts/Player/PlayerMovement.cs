@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount;
 
     [SerializeField] Animator anim;
+    [SerializeField] Animator ballAnim;
 
     [SerializeField] float dashSpeed, dashTime;
     private float dashCounter;
@@ -25,8 +26,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject standing, ball;
     [SerializeField] float ballCooldown, ballCooldownCounter;
 
+    [SerializeField] Transform bombPoint;
+    [SerializeField] GameObject bomb;
+    [SerializeField] PlayerAbilities abilities;
+
     void Start()
     {
+        abilities = GetComponent<PlayerAbilities>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -51,9 +57,27 @@ public class PlayerMovement : MonoBehaviour
             PlayerMove();
         }
 
-        
+
         PlayerJump();
+
         PlayerFire();
+
+        if (abilities.CanTurnBall)
+        {
+            PlayerTurnBall();
+        }
+        
+        anim.SetBool("isOnGround", isOnGround);
+        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        if (ball.activeSelf)
+        {
+            ballAnim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        }
+
+    }
+
+    private void PlayerTurnBall()
+    {
         if (ballCooldownCounter > 0)
         {
             ballCooldownCounter -= Time.deltaTime;
@@ -85,15 +109,11 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-
-        anim.SetBool("isOnGround", isOnGround);
-        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
-         
     }
 
     private void PlayerDash()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && abilities.CanDash)
         {
             dashCounter = dashTime;
             dashCooldownCounter = dashCooldown;
@@ -117,10 +137,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerFire()
     {
-        if (Input.GetButtonDown("Fire1") && standing.activeSelf)
+        if (Input.GetButtonDown("Fire1"))
         {
-            anim.SetTrigger("isShooting");
-            Instantiate(bullet, shotPoint.position, shotPoint.rotation).MoveDir = new Vector2(transform.localScale.x, 0f);
+            if (standing.activeSelf)
+            {
+                anim.SetTrigger("isShooting");
+                Instantiate(bullet, shotPoint.position, shotPoint.rotation).MoveDir = new Vector2(transform.localScale.x, 0f);
+            }else if (ball.activeSelf && abilities.CanDropBomb)
+            {
+                Instantiate(bomb, bombPoint.position,bombPoint.rotation);
+            }
         }
     }
 
@@ -130,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpCount = 0;
         }
-        if (Input.GetButtonDown("Jump") && jumpCount < 1)
+        if (Input.GetButtonDown("Jump") && jumpCount < 1 && abilities.CanDoubleJump)
         {
             jumpCount++;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);

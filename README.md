@@ -5,10 +5,10 @@ Self Study, 2D Metroidvania Game
 
 - [X] Player Manager
 - [X] Camera Manager
-- [ ] Weapon System
-- [ ] Abilites
-- [ ] Unlocking
-- [ ] Enemy System
+- [X] Weapon System
+- [X] Abilites
+- [X] Unlocking
+- [X] Enemy System
 - [ ] HP System
 - [ ] Level Manager
 - [ ] Levels 

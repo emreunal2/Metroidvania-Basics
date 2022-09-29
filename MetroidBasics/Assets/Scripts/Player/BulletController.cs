@@ -12,7 +12,7 @@ public class BulletController : MonoBehaviour
 
     public Vector2 MoveDir { get => moveDir; set => moveDir = value; }
     [SerializeField] GameObject impactEffect;
-
+    [SerializeField] int damageAmount = 1;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,6 +29,10 @@ public class BulletController : MonoBehaviour
     {
         Instantiate(impactEffect, transform.position, Quaternion.identity);
         Debug.Log(other.gameObject);
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
+        }
         Destroy(gameObject);
     }
 

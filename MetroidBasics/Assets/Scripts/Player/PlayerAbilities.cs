@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerAbilities : MonoBehaviour
 {
-    private bool canDropBomb;
-    private bool canDoubleJump;
-    private bool canDash;
-    private bool canTurnBall;
+    [SerializeField] bool canDropBomb;
+    [SerializeField] bool canDoubleJump;
+    [SerializeField] bool canDash;
+    [SerializeField] bool canTurnBall;
 
     public bool CanDropBomb { get => canDropBomb; set => canDropBomb = value; }
     public bool CanDoubleJump { get => canDoubleJump; set => canDoubleJump = value; }

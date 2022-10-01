@@ -7,6 +7,10 @@ public class PlayerHp : MonoBehaviour
     public static PlayerHp instance;
 
     [SerializeField] int currentHp, MaxHp;
+
+    public int CurrentHp { get => currentHp; set => currentHp = value; }
+    public int MaxHp1 { get => MaxHp; set => MaxHp = value; }
+
     private void Awake()
     {
         instance = this;
@@ -15,6 +19,7 @@ public class PlayerHp : MonoBehaviour
     void Start()
     {
         currentHp = MaxHp;
+        UIManager.instance.UpdateUI(MaxHp, CurrentHp);
     }
 
     // Update is called once per frame
@@ -30,5 +35,6 @@ public class PlayerHp : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        UIManager.instance.UpdateUI(MaxHp, CurrentHp);
     }
 }

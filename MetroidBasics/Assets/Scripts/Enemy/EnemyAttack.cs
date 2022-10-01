@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] int damageAmount;
-
+    [SerializeField] bool destroyOnDamage;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -25,5 +25,9 @@ public class EnemyAttack : MonoBehaviour
     void DealDamage()
     {
         PlayerHp.instance.TakeDamage(damageAmount);
+        if (destroyOnDamage)
+        {
+            Destroy(gameObject);
+        }
     }
 }

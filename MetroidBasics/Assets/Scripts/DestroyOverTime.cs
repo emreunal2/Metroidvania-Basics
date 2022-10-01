@@ -14,6 +14,6 @@ public class DestroyOverTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject, lifeTime);
+        Destroy(gameObject, lifeTime);        
     }
 }

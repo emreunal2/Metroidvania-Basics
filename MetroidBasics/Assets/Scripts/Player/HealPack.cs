@@ -10,6 +10,7 @@ public class HealPack : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerHp.instance.Healing(amount);
+            Destroy(gameObject);
         }
     }
 }

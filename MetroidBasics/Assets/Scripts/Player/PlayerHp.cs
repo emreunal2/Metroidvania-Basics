@@ -13,13 +13,21 @@ public class PlayerHp : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
     {
-        currentHp = MaxHp;
-        UIManager.instance.UpdateUI(MaxHp, CurrentHp);
+        FullHealth();
     }
 
     // Update is called once per frame
@@ -33,8 +41,24 @@ public class PlayerHp : MonoBehaviour
         currentHp -= damageAmount;
         if (currentHp <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            Respawn.instance.Respawning();
         }
         UIManager.instance.UpdateUI(MaxHp, CurrentHp);
+    }
+
+    public void FullHealth()
+    {
+        currentHp = MaxHp;
+        UIManager.instance.UpdateUI(MaxHp, CurrentHp);
+    }
+
+    public void Healing(int hpAmount)
+    {
+        currentHp += hpAmount;
+        if (currentHp > MaxHp)
+        {
+            currentHp = MaxHp;
+        }
     }
 }
